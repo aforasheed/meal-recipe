@@ -6,9 +6,9 @@ const recipeCloseBtn = document.getElementById("recipe-close-btn");
 // event listeners
 searchBtn.addEventListener("click", getMealList);
 mealList.addEventListener("click", getMealRecipe);
-recipeCloseBtn.addEventListener('click', ()=>{
-    mealDetailsContent.parentElement.classList.remove('showRecipe')
-})
+recipeCloseBtn.addEventListener("click", () => {
+  mealDetailsContent.parentElement.classList.remove("showRecipe");
+});
 
 // get meal list that matches with the ingredients
 function getMealList() {
@@ -59,49 +59,28 @@ function getMealRecipe(e) {
 // create a modal
 
 function mealRecipeModal(meal) {
-    console.log(meal);
-      meal = [0];
-        let html = ''
-       html += `
-            <h2 class="recipe-title">${meal.strMeal}</h2>
-            <p class="recipe-category">${meal.strCategory}</p>
+  console.log(meal);
+
+  let html = "";
+  meal.forEach(function (meal) {
+    let { strMeal, strCategory, strInstructions, strMealThumb, strYoutube } =
+      meal;
+    html += `
+            <h2 class="recipe-title">${strMeal}</h2>
+            <p class="recipe-category">${strCategory}</p>
             <div class="recipe-instruct">
             <h3>Instructions:</h3>
-            <p>${meal.strInstructions}</p>
+            <p>${strInstructions}</p>
             </div>
             <div class="recipe-meal-img">
-            <img src="${meal.strMealThumb}" alt="" />
+            <img src="${strMealThumb}" alt="" />
             </div>
             <div class="recipe-link">
-            <a href="${meal.strYoutube}" target="_blank">Watch Video</a>
+            <a href="${strYoutube}" target="_blank">Watch Video</a>
             </div>
       `;
-      mealDetailsContent.innerHTML = html;
-      mealDetailsContent.parentElement.classList.add("showRecipe");
-}
+  });
 
-
-/*
-console.log(meal);
-//   meal = [0];
-  let { strMeal, strCategory, strInstructions, strMealThumb, strYoutube } =
-    meal;
-
-  let html = `
-        <h2 class="recipe-title">${strMeal}</h2>
-        <p class="recipe-category">${strCategory}</p>
-        <div class="recipe-instruct">
-        <h3>Instructions:</h3>
-        <p>${strInstructions}</p>
-        </div>
-        <div class="recipe-meal-img">
-        <img src="${strMealThumb}" alt="" />
-        </div>
-        <div class="recipe-link">
-        <a href="${strYoutube}" target="_blank">Watch Video</a>
-        </div>
-  `;
   mealDetailsContent.innerHTML = html;
   mealDetailsContent.parentElement.classList.add("showRecipe");
-
-*/
+}
